@@ -3,14 +3,20 @@ pipeline {
 
     environment {
         DOCKERHUB_CRED = credentials('dockerhub-token')
-        GIT_CRED = credentials('github-token')
-        IMAGE = "kunj22/nginx-demo"
+        GIT_CRED       = credentials('github-token')
+        IMAGE          = "kunj22/nginx-demo"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/kunjbhuva7/argocd-demo.git'
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/kunjbhuva7/argocd-demo.git',
+                        credentialsId: 'github-token'
+                    ]]
+                ])
             }
         }
 
