@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CRED = credentials('dockerhub-token')
-        GIT_CRED = credentials('9800007e-a15c-44c7-a832-6dd7d875fadd')
+        GIT_CRED = credentials('github-token')
         IMAGE = "kunj22/nginx-demo"
     }
 
